@@ -26,7 +26,7 @@ background-size: contain
 
 <!---- SLIDES SAVED TO PDF USING: 
 
-decktape remark "slides/intro-to-data-analysis-R.html" slides/intro-to-data-analysis.pdf 
+decktape remark --load-pause 3200 "slides/intro-to-data-analysis-R.html" slides/intro-to-data-analysis.pdf 
 
 using node.js
 
@@ -34,7 +34,7 @@ using node.js
 
 <br><br>
 
-# Tidying and manipulating data using the `tidyverse`
+# Tidying and manipulating data using the tidyverse
 
 <br><br>
 
@@ -160,11 +160,594 @@ xaringanExtra::use_share_again()
 ```{r xaringanExtra-search, echo=FALSE}
 # Add magnifying glass search function to bottom left for quick
 # searching of slides
-xaringanExtra::use_search(show_icon = TRUE, auto_search = FALSE)
+#xaringanExtra::use_search(show_icon = TRUE, auto_search = FALSE)
 ```
 
 
 ---
 
 class: middle, inverse
+
+## This training course is designed to be hands-on. We'll be spending most of our time working through real applications of the data tidying tools that make up the tidyverse.
+
+---
+
+class: middle, inverse
+
+.pull-left[
+
+<br><br>
+
+# Data tidying requires the use of multiple tools
+
+* The idea of today is to introduce you to all the tools that will allow you to tidy any untidy dataset.
+* You won't be able to use all of them perfectly right from the start.
+* But if you invest time into learning to use them, you can become very proficient in data tidying.
+
+
+
+]
+
+.pull-right[
+
+.center[
+```{r, echo = FALSE, out.width = "80%"}
+
+knitr::include_graphics("images/icons8-toolbox.svg")
+
+```
+]
+
+]
+
+---
+
+class: middle, inverse
+
+.pull-left[
+
+<br><br>
+
+# Why spend time learning how to tidy data?
+
+* Tidying data and preparing it for analysis or visualisation is often the most time consuming part of any quantitative research project.
+* Tidying data is not often reproducable *unless it has been tidied programatically*.
+
+]
+
+.pull-right[
+
+.center[
+```{r, echo = FALSE, out.width = "80%"}
+
+knitr::include_graphics("images/icons8-toolbox.svg")
+
+```
+]
+
+]
+
+---
+
+class: middle, inverse
+
+## Introduction: What is tidy data?
+
+
+
+---
+
+background-color: white
+
+.center[
+```{r, echo = FALSE, out.width = "80%"}
+
+knitr::include_graphics("images/tidy-data-intro-1.jpg")
+
+```
+]
+
+.footnote[
+.right[Illustrations from the [Openscapes](https://www.openscapes.org/) blog [Tidy Data for reproducibility, efficiency, and collaboration](https://www.openscapes.org/blog/2020/10/12/tidy-data/) by Julia Lowndes and Allison Horst] 
+]
+
+
+---
+
+background-color: white
+
+.center[
+```{r, echo = FALSE, out.width = "80%"}
+
+knitr::include_graphics("images/tidy-data-intro-2.jpg")
+
+```
+]
+
+.footnote[
+.right[Illustrations from the [Openscapes](https://www.openscapes.org/) blog [Tidy Data for reproducibility, efficiency, and collaboration](https://www.openscapes.org/blog/2020/10/12/tidy-data/) by Julia Lowndes and Allison Horst] 
+]
+
+---
+
+background-color: white
+
+.center[
+```{r, echo = FALSE, out.width = "80%"}
+
+knitr::include_graphics("images/tidy-data-intro-3.jpg")
+
+```
+]
+
+.footnote[
+.right[Illustrations from the [Openscapes](https://www.openscapes.org/) blog [Tidy Data for reproducibility, efficiency, and collaboration](https://www.openscapes.org/blog/2020/10/12/tidy-data/) by Julia Lowndes and Allison Horst] 
+]
+
+---
+
+background-color: white
+
+.center[
+```{r, echo = FALSE, out.width = "80%"}
+
+knitr::include_graphics("images/tidy-data-intro-4.jpg")
+
+```
+]
+
+.footnote[
+.right[Illustrations from the [Openscapes](https://www.openscapes.org/) blog [Tidy Data for reproducibility, efficiency, and collaboration](https://www.openscapes.org/blog/2020/10/12/tidy-data/) by Julia Lowndes and Allison Horst] 
+]
+
+
+---
+
+class: inverse, middle
+
+## 1. Reading data from different data sources and select/rename columns.
+
+* Reading data from Stata, SPSS, and Excel files
+* Filtering variables using select()
+* Generalised select()
+
+---
+
+background-color: white
+
+<br> 
+
+.center[
+```{r, echo = FALSE, out.width = "80%"}
+
+knitr::include_graphics("images/1-rename.png")
+
+```
+]
+
+
+.footnote[
+.right[[Artwork by @allison_horst](https://twitter.com/allison_horst)]
+
+]
+
+---
+
+background-color: white
+
+<br> 
+
+.center[
+```{r, echo = FALSE, out.width = "80%"}
+
+knitr::include_graphics("images/1-janitor.png")
+
+```
+]
+
+
+.footnote[
+.right[[Artwork by @allison_horst](https://twitter.com/allison_horst)]
+
+]
+
+
+---
+
+class: inverse, middle
+
+## 2. Creating new variables using mutate()
+
+* Creating new variables that are transformations of existing variables
+* Recoding categorical variables using case_when()
+* Extracting numbers with parse_number()
+* Performing repeated/generalised transformations
+
+
+---
+
+background-color: white
+
+<br> 
+
+.center[
+```{r, echo = FALSE, out.width = "60%"}
+
+knitr::include_graphics("images/2-mutate.png")
+
+```
+]
+
+
+.footnote[
+.right[[Artwork by @allison_horst](https://twitter.com/allison_horst)]
+
+]
+
+---
+
+background-color: white
+
+<br> 
+
+.center[
+```{r, echo = FALSE, out.width = "80%"}
+
+knitr::include_graphics("images/2-recode.png")
+
+```
+]
+
+
+.footnote[
+.right[[Artwork by @allison_horst](https://twitter.com/allison_horst)]
+
+]
+
+---
+
+background-color: white
+
+<br> 
+
+.center[
+```{r, echo = FALSE, out.width = "50%"}
+
+knitr::include_graphics("images/2-parse-number.png")
+
+```
+]
+
+
+.footnote[
+.right[[Artwork by @allison_horst](https://twitter.com/allison_horst)]
+
+]
+
+---
+
+class: inverse, middle
+
+## 3. Aggregating data to higher levels with group_by()
+
+* Creating new, aggregated datasets using group_by() and summarise()
+* Adding group-level variables for multilevel models using group_by() and mutate()
+
+
+---
+
+background-color: white
+
+.center[
+
+<video width="100%" height="500" controls autoplay="true" loop="true">
+<source src="images/3-grp-summarize-01.mp4" type="video/mp4">
+</video>
+
+
+]
+
+
+
+.footnote[
+.right[[Animation by Andrew Heiss](https://www.andrewheiss.com/blog/2024/04/04/group_by-summarize-ungroup-animations/)]
+
+]
+
+
+---
+
+class: inverse, middle
+
+## 4. Pivoting data between wide and long formats
+
+* Converting wide datasets suitable for Latent Growth Structural Equation Modelling to long datasets suitable for multilevel modelling.
+* ... and the reverse.
+
+
+
+---
+
+background-color: white
+
+.center[
+```{r, echo = FALSE, out.width = "40%"}
+
+knitr::include_graphics("images/4-tidyr-pivoting.gif")
+
+```
+]
+
+
+
+.footnote[
+.right[[Animation by Garrick Aden-Buie](https://www.garrickadenbuie.com/project/tidyexplain/)]
+
+]
+
+---
+
+background-color: white
+
+<br>
+
+.center[
+```{r, echo = FALSE, out.width = "60%"}
+
+knitr::include_graphics("images/4-pivot.png")
+
+```
+]
+
+
+
+.footnote[
+.right[[Animation by Garrick Aden-Buie](https://www.garrickadenbuie.com/project/tidyexplain/)]
+
+]
+
+
+---
+
+class: inverse, middle
+
+## 5. Working with strings and a little bit of regex
+
+* How to remove certain characters or strings from character type variables (especially footnotes).
+* Extracting subsets of characters from longer strings.
+* Splitting variables into multiple columns based on a character within a string.
+
+---
+
+background-color: white
+
+<br> 
+
+.center[
+```{r, echo = FALSE, out.width = "60%"}
+
+knitr::include_graphics("images/5-stringr.png")
+
+```
+]
+
+
+.footnote[
+.right[[Artwork by @allison_horst](https://twitter.com/allison_horst)]
+
+]
+
+---
+
+background-color: white
+
+<br> 
+
+.center[
+```{r, echo = FALSE, out.width = "80%"}
+
+knitr::include_graphics("images/5-detect-string.png")
+
+```
+]
+
+
+.footnote[
+.right[[Artwork by @allison_horst](https://twitter.com/allison_horst)]
+
+]
+
+
+---
+
+class: inverse, middle
+
+## 6. Joining relational datasets
+
+* Joining datasets based on a shared key
+* Joining datasets together based on a combination of variables that form a key
+* Joining higher level data to lower level data
+* Checking for missing observations with anti_join()
+
+Key: A value, usually a string, that uniquely identifies each observation across multiple related (relational) datasets
+
+---
+
+background-color: white
+
+<br>
+
+.center[
+```{r, echo = FALSE, out.width = "60%"}
+
+knitr::include_graphics("images/6-left-join.gif")
+
+```
+]
+
+
+
+.footnote[
+.right[[Animation by Garrick Aden-Buie](https://www.garrickadenbuie.com/project/tidyexplain/)]
+
+]
+
+---
+
+background-color: white
+
+<br>
+
+.center[
+```{r, echo = FALSE, out.width = "60%"}
+
+knitr::include_graphics("images/6-left-join-static.png")
+
+```
+]
+
+
+
+.footnote[
+.right[[Diagram from R for Data Science 2e](https://r4ds.hadley.nz)]
+
+]
+
+---
+
+class: inverse, middle
+
+## 7. Working with dates
+
+* How to fix how R interprets dates when they aren't in YYYY-MM-DD format.
+
+---
+
+background-color: white
+
+<br> 
+
+.center[
+```{r, echo = FALSE, out.width = "70%"}
+
+knitr::include_graphics("images/7-dates.png")
+
+```
+]
+
+
+.footnote[
+.right[[Artwork by @allison_horst](https://twitter.com/allison_horst)]
+
+]
+
+---
+
+class: inverse, middle
+
+## 8. Filtering rows of observations
+
+* How to filter data based on values in character/factor type variables
+* How to filter data based on numeric type variables
+* How to filter data based on dates
+
+---
+
+background-color: white
+
+<br> 
+
+.center[
+```{r, echo = FALSE, out.width = "80%"}
+
+knitr::include_graphics("images/8-filter.png")
+
+```
+]
+
+
+.footnote[
+.right[[Artwork by @allison_horst](https://twitter.com/allison_horst)]
+
+]
+
+---
+
+class: middle, inverse
+
+.pull-left[
+
+<br><br>
+
+# You now have all the tools — all that's left is the practice.
+
+* In this course I've tried to give you, in as short a time as possible, information and practical examples of how to use all of the tools I've picked up over more than 10 years of using R.
+
+
+
+
+]
+
+.pull-right[
+
+.center[
+```{r, echo = FALSE, out.width = "80%"}
+
+knitr::include_graphics("images/icons8-toolbox.svg")
+
+```
+]
+
+]
+
+---
+
+class: middle, inverse
+
+.pull-left[
+
+<br><br>
+
+# You now have all the tools — all that's left is the practice.
+
+* If you keep practicing tidying untidy datasets, using these tools will eventually become effortless. Untidy data becomes a puzzle to solve. But when you're just starting out, the puzzles will be frustrating.
+
+
+
+
+]
+
+.pull-right[
+
+.center[
+```{r, echo = FALSE, out.width = "80%"}
+
+knitr::include_graphics("images/icons8-toolbox.svg")
+
+```
+]
+
+]
+
+---
+
+background-color: white
+
+<br> 
+
+.center[
+```{r, echo = FALSE, out.width = "100%"}
+
+knitr::include_graphics("images/we-believe.png")
+
+```
+]
+
+
+.footnote[
+.right[[Artwork by @allison_horst](https://twitter.com/allison_horst)]
+
+]
+
+
 

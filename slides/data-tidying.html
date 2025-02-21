@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Tidying and manipulating data using the tidyverse</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Calum Webb" />
+    <meta name="date" content="2025-02-21" />
+    <script src="data-tidying_files/header-attrs/header-attrs.js"></script>
+    <link href="data-tidying_files/tile-view/tile-view.css" rel="stylesheet" />
+    <script src="data-tidying_files/tile-view/tile-view.js"></script>
+    <link href="data-tidying_files/panelset/panelset.css" rel="stylesheet" />
+    <script src="data-tidying_files/panelset/panelset.js"></script>
+    <script src="data-tidying_files/xaringanExtra-progressBar/progress-bar.js"></script>
+    <link href="data-tidying_files/xaringanExtra-extra-styles/xaringanExtra-extra-styles.css" rel="stylesheet" />
+    <script src="data-tidying_files/clipboard/clipboard.min.js"></script>
+    <link href="data-tidying_files/shareon/shareon.min.css" rel="stylesheet" />
+    <script src="data-tidying_files/shareon/shareon.min.js"></script>
+    <link href="data-tidying_files/xaringanExtra-shareagain/shareagain.css" rel="stylesheet" />
+    <script src="data-tidying_files/xaringanExtra-shareagain/shareagain.js"></script>
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="css/custom.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+
+class: middle, title
+background-size: contain
+
+
+&lt;!---- SLIDES SAVED TO PDF USING: 
+
+decktape remark "slides/intro-to-data-analysis-R.html" slides/intro-to-data-analysis.pdf 
+
+using node.js
+
+----&gt;
+
+&lt;br&gt;&lt;br&gt;
+
+# Tidying and manipulating data using the tidyverse
+
+&lt;br&gt;&lt;br&gt;
+
+**Dr. Calum Webb**&lt;br&gt;
+Sheffield Methods Institute, the University of Sheffield&lt;br&gt;
+[c.j.webb@sheffield.ac.uk](mailto:c.j.webb@sheffield.ac.uk)
+
+
+
+
+
+<div>
+<style type="text/css">.xaringan-extra-logo {
+width: 180px;
+height: 128px;
+z-index: 0;
+background-image: url(header/smi-logo-white.png);
+background-size: contain;
+background-repeat: no-repeat;
+position: absolute;
+top:1em;right:2em;
+}
+</style>
+<script>(function () {
+  let tries = 0
+  function addLogo () {
+    if (typeof slideshow === 'undefined') {
+      tries += 1
+      if (tries < 10) {
+        setTimeout(addLogo, 100)
+      }
+    } else {
+      document.querySelectorAll('.remark-slide-content:not(.inverse):not(.hide_logo)')
+        .forEach(function (slide) {
+          const logo = document.createElement('div')
+          logo.classList = 'xaringan-extra-logo'
+          logo.href = null
+          slide.appendChild(logo)
+        })
+    }
+  }
+  document.addEventListener('DOMContentLoaded', addLogo)
+})()</script>
+</div>
+
+
+
+
+
+
+<style>.xe__progress-bar__container {
+  top:0;
+  opacity: 1;
+  position:absolute;
+  right:0;
+  left: 0;
+}
+.xe__progress-bar {
+  height: 0.25em;
+  background-color: #F8F8F8;
+  width: calc(var(--slide-current) / var(--slide-total) * 100%);
+}
+.remark-visible .xe__progress-bar {
+  animation: xe__progress-bar__wipe 200ms forwards;
+  animation-timing-function: cubic-bezier(.86,0,.07,1);
+}
+@keyframes xe__progress-bar__wipe {
+  0% { width: calc(var(--slide-previous) / var(--slide-total) * 100%); }
+  100% { width: calc(var(--slide-current) / var(--slide-total) * 100%); }
+}</style>
+
+
+
+
+
+
+
+
+---
+
+class: middle, inverse
+
+## This training course is designed to be hands-on. We'll be spending most of our time working through real applications of the data tidying tools that make up the tidyverse.
+
+---
+
+class: middle, inverse
+
+.pull-left[
+
+&lt;br&gt;&lt;br&gt;
+
+# Data tidying requires the use of multiple tools
+
+* The idea of today is to introduce you to all the tools that will allow you to tidy any untidy dataset.
+* You won't be able to use all of them perfectly right from the start.
+* But if you invest time into learning to use them, you can become very proficient in data tidying.
+
+
+
+]
+
+.pull-right[
+
+.center[
+&lt;img src="images/icons8-toolbox.svg" width="80%" /&gt;
+]
+
+]
+
+---
+
+class: middle, inverse
+
+.pull-left[
+
+&lt;br&gt;&lt;br&gt;
+
+# Why spend time learning how to tidy data?
+
+* Tidying data and preparing it for analysis or visualisation is often the most time consuming part of any quantitative research project.
+* Tidying data is not often reproducable *unless it has been tidied programatically*.
+
+]
+
+.pull-right[
+
+.center[
+&lt;img src="images/icons8-toolbox.svg" width="80%" /&gt;
+]
+
+]
+
+---
+
+class: middle, inverse
+
+## Introduction: What is tidy data?
+
+
+
+---
+
+background-color: white
+
+.center[
+&lt;img src="images/tidy-data-intro-1.jpg" width="80%" /&gt;
+]
+
+.footnote[
+.right[Illustrations from the [Openscapes](https://www.openscapes.org/) blog [Tidy Data for reproducibility, efficiency, and collaboration](https://www.openscapes.org/blog/2020/10/12/tidy-data/) by Julia Lowndes and Allison Horst] 
+]
+
+
+---
+
+background-color: white
+
+.center[
+&lt;img src="images/tidy-data-intro-2.jpg" width="80%" /&gt;
+]
+
+.footnote[
+.right[Illustrations from the [Openscapes](https://www.openscapes.org/) blog [Tidy Data for reproducibility, efficiency, and collaboration](https://www.openscapes.org/blog/2020/10/12/tidy-data/) by Julia Lowndes and Allison Horst] 
+]
+
+---
+
+background-color: white
+
+.center[
+&lt;img src="images/tidy-data-intro-3.jpg" width="80%" /&gt;
+]
+
+.footnote[
+.right[Illustrations from the [Openscapes](https://www.openscapes.org/) blog [Tidy Data for reproducibility, efficiency, and collaboration](https://www.openscapes.org/blog/2020/10/12/tidy-data/) by Julia Lowndes and Allison Horst] 
+]
+
+---
+
+background-color: white
+
+.center[
+&lt;img src="images/tidy-data-intro-4.jpg" width="80%" /&gt;
+]
+
+.footnote[
+.right[Illustrations from the [Openscapes](https://www.openscapes.org/) blog [Tidy Data for reproducibility, efficiency, and collaboration](https://www.openscapes.org/blog/2020/10/12/tidy-data/) by Julia Lowndes and Allison Horst] 
+]
+
+
+---
+
+class: inverse, middle
+
+## 1. Reading data from different data sources and select/rename columns.
+
+* Reading data from Stata, SPSS, and Excel files
+* Filtering variables using select()
+* Generalised select()
+
+---
+
+background-color: white
+
+&lt;br&gt; 
+
+.center[
+&lt;img src="images/1-rename.png" width="80%" /&gt;
+]
+
+
+.footnote[
+.right[[Artwork by @allison_horst](https://twitter.com/allison_horst)]
+
+]
+
+---
+
+background-color: white
+
+&lt;br&gt; 
+
+.center[
+&lt;img src="images/1-janitor.png" width="80%" /&gt;
+]
+
+
+.footnote[
+.right[[Artwork by @allison_horst](https://twitter.com/allison_horst)]
+
+]
+
+
+---
+
+class: inverse, middle
+
+## 2. Creating new variables using mutate()
+
+* Creating new variables that are transformations of existing variables
+* Recoding categorical variables using case_when()
+* Extracting numbers with parse_number()
+* Performing repeated/generalised transformations
+
+
+---
+
+background-color: white
+
+&lt;br&gt; 
+
+.center[
+&lt;img src="images/2-mutate.png" width="60%" /&gt;
+]
+
+
+.footnote[
+.right[[Artwork by @allison_horst](https://twitter.com/allison_horst)]
+
+]
+
+---
+
+background-color: white
+
+&lt;br&gt; 
+
+.center[
+&lt;img src="images/2-recode.png" width="80%" /&gt;
+]
+
+
+.footnote[
+.right[[Artwork by @allison_horst](https://twitter.com/allison_horst)]
+
+]
+
+---
+
+background-color: white
+
+&lt;br&gt; 
+
+.center[
+&lt;img src="images/2-parse-number.png" width="50%" /&gt;
+]
+
+
+.footnote[
+.right[[Artwork by @allison_horst](https://twitter.com/allison_horst)]
+
+]
+
+---
+
+class: inverse, middle
+
+## 3. Aggregating data to higher levels with group_by()
+
+* Creating new, aggregated datasets using group_by() and summarise()
+* Adding group-level variables for multilevel models using group_by() and mutate()
+
+
+---
+
+background-color: white
+
+.center[
+
+&lt;video width="100%" height="500" controls autoplay="true" loop="true"&gt;
+&lt;source src="images/3-grp-summarize-01.mp4" type="video/mp4"&gt;
+&lt;/video&gt;
+
+
+]
+
+
+
+.footnote[
+.right[[Animation by Andrew Heiss](https://www.andrewheiss.com/blog/2024/04/04/group_by-summarize-ungroup-animations/)]
+
+]
+
+
+---
+
+class: inverse, middle
+
+## 4. Pivoting data between wide and long formats
+
+* Converting wide datasets suitable for Latent Growth Structural Equation Modelling to long datasets suitable for multilevel modelling.
+* ... and the reverse.
+
+
+
+---
+
+background-color: white
+
+.center[
+&lt;img src="images/4-tidyr-pivoting.gif" width="40%" /&gt;
+]
+
+
+
+.footnote[
+.right[[Animation by Garrick Aden-Buie](https://www.garrickadenbuie.com/project/tidyexplain/)]
+
+]
+
+---
+
+background-color: white
+
+&lt;br&gt;
+
+.center[
+&lt;img src="images/4-pivot.png" width="60%" /&gt;
+]
+
+
+
+.footnote[
+.right[[Animation by Garrick Aden-Buie](https://www.garrickadenbuie.com/project/tidyexplain/)]
+
+]
+
+
+---
+
+class: inverse, middle
+
+## 5. Working with strings and a little bit of regex
+
+* How to remove certain characters or strings from character type variables (especially footnotes).
+* Extracting subsets of characters from longer strings.
+* Splitting variables into multiple columns based on a character within a string.
+
+---
+
+background-color: white
+
+&lt;br&gt; 
+
+.center[
+&lt;img src="images/5-stringr.png" width="60%" /&gt;
+]
+
+
+.footnote[
+.right[[Artwork by @allison_horst](https://twitter.com/allison_horst)]
+
+]
+
+---
+
+background-color: white
+
+&lt;br&gt; 
+
+.center[
+&lt;img src="images/5-detect-string.png" width="80%" /&gt;
+]
+
+
+.footnote[
+.right[[Artwork by @allison_horst](https://twitter.com/allison_horst)]
+
+]
+
+
+---
+
+class: inverse, middle
+
+## 6. Joining relational datasets
+
+* Joining datasets based on a shared key
+* Joining datasets together based on a combination of variables that form a key
+* Joining higher level data to lower level data
+* Checking for missing observations with anti_join()
+
+Key: A value, usually a string, that uniquely identifies each observation across multiple related (relational) datasets
+
+---
+
+background-color: white
+
+&lt;br&gt;
+
+.center[
+&lt;img src="images/6-left-join.gif" width="60%" /&gt;
+]
+
+
+
+.footnote[
+.right[[Animation by Garrick Aden-Buie](https://www.garrickadenbuie.com/project/tidyexplain/)]
+
+]
+
+---
+
+background-color: white
+
+&lt;br&gt;
+
+.center[
+&lt;img src="images/6-left-join-static.png" width="60%" /&gt;
+]
+
+
+
+.footnote[
+.right[[Diagram from R for Data Science 2e](https://r4ds.hadley.nz)]
+
+]
+
+---
+
+class: inverse, middle
+
+## 7. Working with dates
+
+* How to fix how R interprets dates when they aren't in YYYY-MM-DD format.
+
+---
+
+background-color: white
+
+&lt;br&gt; 
+
+.center[
+&lt;img src="images/7-dates.png" width="70%" /&gt;
+]
+
+
+.footnote[
+.right[[Artwork by @allison_horst](https://twitter.com/allison_horst)]
+
+]
+
+---
+
+class: inverse, middle
+
+## 8. Filtering rows of observations
+
+* How to filter data based on values in character/factor type variables
+* How to filter data based on numeric type variables
+* How to filter data based on dates
+
+---
+
+background-color: white
+
+&lt;br&gt; 
+
+.center[
+&lt;img src="images/8-filter.png" width="80%" /&gt;
+]
+
+
+.footnote[
+.right[[Artwork by @allison_horst](https://twitter.com/allison_horst)]
+
+]
+
+---
+
+class: middle, inverse
+
+.pull-left[
+
+&lt;br&gt;&lt;br&gt;
+
+# You now have all the tools — all that's left is the practice.
+
+* In this course I've tried to give you, in as short a time as possible, information and practical examples of how to use all of the tools I've picked up over more than 10 years of using R.
+
+
+
+
+]
+
+.pull-right[
+
+.center[
+&lt;img src="images/icons8-toolbox.svg" width="80%" /&gt;
+]
+
+]
+
+---
+
+class: middle, inverse
+
+.pull-left[
+
+&lt;br&gt;&lt;br&gt;
+
+# You now have all the tools — all that's left is the practice.
+
+* If you keep practicing tidying untidy datasets, using these tools will eventually become effortless. Untidy data becomes a puzzle to solve. But when you're just starting out, the puzzles will be frustrating.
+
+
+
+
+]
+
+.pull-right[
+
+.center[
+&lt;img src="images/icons8-toolbox.svg" width="80%" /&gt;
+]
+
+]
+
+---
+
+background-color: white
+
+&lt;br&gt; 
+
+.center[
+&lt;img src="images/we-believe.png" width="100%" /&gt;
+]
+
+
+.footnote[
+.right[[Artwork by @allison_horst](https://twitter.com/allison_horst)]
+
+]
+
+
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"slideNumberFormat": "%current%",
+"highlightStyle": "github",
+"highlightLines": true,
+"sealed": false,
+"ratio": "16:9",
+"self_contained": true,
+"countIncrementalSlides": true
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<style>
+.my-header {
+	background-color: #131E2990;
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	height: 70px;
+	width: 100%;
+	text-align: left;
+}
+</style>
+
+<script>
+document
+  .querySelectorAll(
+    '.remark-slide-content' +
+    ':not(.inverse)' +
+    // add additional classes to exclude here, e.g.
+    // ':not(.inverse)' +
+    ':not(.hide-logo)'
+  )
+  .forEach(el => {
+    el.innerHTML += '<div class="my-header"></div>';
+  });
+</script>
+
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
