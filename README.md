@@ -54,6 +54,11 @@ This repository contains all of the data and code we will be using in the exerci
 
 5) RStudio should prompt you to install any packages that are used in the `exercises.R` script if they are not already installed. Alternatively, you can scroll down to past the contents page and run all of the `install.packages()` code (highlight all lines and then press Ctrl + Enter or CMD + Enter, or click the "Run" button). You will need to be connected to the internet. If asked whether you want to compile any packages from source, type no and then press Enter. 
 
+<p align="center" width="100%">
+
+![](img/readme-img-4.png)
+
+</p>
 
 
 Once you have completed all of the steps above, you are ready for the course. You are welcome to explore the `exercises.R` script in advance of the training.
