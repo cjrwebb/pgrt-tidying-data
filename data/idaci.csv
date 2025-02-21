@@ -1,0 +1,152 @@
+new_la_code,la_name,imd19_idaci
+E06000001,Hartlepool,0.283
+E06000002,Middlesbrough,0.327
+E06000003,Redcar and Cleveland,0.256
+E06000004,Stockton-on-Tees,0.209
+E06000005,Darlington,0.203
+E06000006,Halton,0.239
+E06000007,Warrington,0.132
+E06000008,Blackburn with Darwen,0.228
+E06000009,Blackpool,0.307
+E06000010,"Kingston upon Hull, City of",0.298
+E06000011,East Riding of Yorkshire,0.118
+E06000012,North East Lincolnshire,0.274
+E06000013,North Lincolnshire,0.183
+E06000014,York,0.1
+E06000015,Derby,0.211
+E06000016,Leicester,0.242
+E06000017,Rutland,0.072
+E06000018,Nottingham,0.298
+E06000019,"Herefordshire, County of",0.124
+E06000020,Telford and Wrekin,0.213
+E06000021,Stoke-on-Trent,0.257
+E06000022,Bath and North East Somerset,0.104
+E06000023,"Bristol, City of",0.206
+E06000024,North Somerset,0.124
+E06000025,South Gloucestershire,0.104
+E06000026,Plymouth,0.203
+E06000027,Torbay,0.219
+E06000030,Swindon,0.149
+E06000031,Peterborough,0.208
+E06000032,Luton,0.196
+E06000033,Southend-on-Sea,0.192
+E06000034,Thurrock,0.186
+E06000035,Medway,0.189
+E06000036,Bracknell Forest,0.089
+E06000037,West Berkshire,0.087
+E06000038,Reading,0.16
+E06000039,Slough,0.147
+E06000040,Windsor and Maidenhead,0.067
+E06000041,Wokingham,0.056
+E06000042,Milton Keynes,0.15
+E06000043,Brighton and Hove,0.153
+E06000044,Portsmouth,0.202
+E06000045,Southampton,0.205
+E06000046,Isle of Wight,0.18
+E06000047,County Durham,0.222
+E06000049,Cheshire East,0.107
+E06000050,Cheshire West and Chester,0.145
+E06000051,Shropshire,0.12
+E06000052,Cornwall,0.164
+E06000053,Isles of Scilly,0.032
+E06000054,Wiltshire,0.102
+E06000055,Bedford,0.151
+E06000056,Central Bedfordshire,0.114
+E06000057,Northumberland,0.174
+E06000058,"Bournemouth, Christchurch and Poole",0.147
+E06000059,Dorset,0.121
+E06000060,Buckinghamshire,0.085
+E08000001,Bolton,0.219
+E08000002,Bury,0.169
+E08000003,Manchester,0.297
+E08000004,Oldham,0.233
+E08000005,Rochdale,0.235
+E08000006,Salford,0.241
+E08000007,Stockport,0.146
+E08000008,Tameside,0.223
+E08000009,Trafford,0.117
+E08000010,Wigan,0.174
+E08000011,Knowsley,0.303
+E08000012,Liverpool,0.299
+E08000013,St. Helens,0.237
+E08000014,Sefton,0.188
+E08000015,Wirral,0.218
+E08000016,Barnsley,0.225
+E08000017,Doncaster,0.227
+E08000018,Rotherham,0.221
+E08000019,Sheffield,0.219
+E08000021,Newcastle upon Tyne,0.247
+E08000022,North Tyneside,0.179
+E08000023,South Tyneside,0.267
+E08000024,Sunderland,0.243
+E08000025,Birmingham,0.276
+E08000026,Coventry,0.218
+E08000027,Dudley,0.206
+E08000028,Sandwell,0.263
+E08000029,Solihull,0.148
+E08000030,Walsall,0.261
+E08000031,Wolverhampton,0.271
+E08000032,Bradford,0.225
+E08000033,Calderdale,0.196
+E08000034,Kirklees,0.177
+E08000035,Leeds,0.203
+E08000036,Wakefield,0.197
+E08000037,Gateshead,0.204
+E09000001,City of London,0.071
+E09000002,Barking and Dagenham,0.238
+E09000003,Barnet,0.126
+E09000004,Bexley,0.16
+E09000005,Brent,0.182
+E09000006,Bromley,0.131
+E09000007,Camden,0.193
+E09000008,Croydon,0.185
+E09000009,Ealing,0.166
+E09000010,Enfield,0.225
+E09000011,Greenwich,0.212
+E09000012,Hackney,0.249
+E09000013,Hammersmith and Fulham,0.186
+E09000014,Haringey,0.208
+E09000015,Harrow,0.123
+E09000016,Havering,0.16
+E09000017,Hillingdon,0.157
+E09000018,Hounslow,0.17
+E09000019,Islington,0.275
+E09000020,Kensington and Chelsea,0.129
+E09000021,Kingston upon Thames,0.1
+E09000022,Lambeth,0.229
+E09000023,Lewisham,0.229
+E09000024,Merton,0.134
+E09000025,Newham,0.201
+E09000026,Redbridge,0.137
+E09000027,Richmond upon Thames,0.07
+E09000028,Southwark,0.241
+E09000029,Sutton,0.126
+E09000030,Tower Hamlets,0.266
+E09000031,Waltham Forest,0.192
+E09000032,Wandsworth,0.154
+E09000033,Westminster,0.183
+E10000003,Cambridgeshire,0.111
+E10000006,Cumbria,0.138
+E10000007,Derbyshire,0.152
+E10000008,Devon,0.123
+E10000011,East Sussex,0.161
+E10000012,Essex,0.144
+E10000013,Gloucestershire,0.126
+E10000014,Hampshire,0.101
+E10000015,Hertfordshire,0.111
+E10000016,Kent,0.158
+E10000017,Lancashire,0.167
+E10000018,Leicestershire,0.106
+E10000019,Lincolnshire,0.164
+E10000020,Norfolk,0.155
+E10000021,Northamptonshire,0.142
+E10000023,North Yorkshire,0.099
+E10000024,Nottinghamshire,0.155
+E10000025,Oxfordshire,0.101
+E10000027,Somerset,0.136
+E10000028,Staffordshire,0.131
+E10000029,Suffolk,0.135
+E10000030,Surrey,0.083
+E10000031,Warwickshire,0.122
+E10000032,West Sussex,0.11
+E10000034,Worcestershire,0.142
