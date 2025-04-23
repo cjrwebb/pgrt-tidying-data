@@ -3,7 +3,6 @@
 ##### Dr. Calum Webb, the University of Sheffield ###########
 #############################################################
 
-
 # Introduction and setup --------------------------------------------------
 
 #' In this training course, you'll be learning some advanced
@@ -51,6 +50,7 @@
 #'    8.1) Filtering data using characters
 #'    8.2) Filtering data using numbers
 #'    8.4) Filtering data using dates
+#'  9) Data tidying challenges (in groups or independently)
 #'  END and References
 #'  
 #'  For this training we'll be primarily using packages from
@@ -314,6 +314,7 @@ tea <- tea %>%
 
 names(tea)
 
+
 #' Sometimes, you might need to do some much more intensive
 #' cleaning of variable names. For example, let's load the
 #' age_structure.csv dataset from the 2011 Census.
@@ -381,7 +382,7 @@ names(age)
 #' Write a simple vector in R using c() that contains 
 #' short variable names for all of the following variables.
 #' Make sure that these variable names are less than 
-#' 10 characters long. 
+#' 10 characters long and are unique. 
 
 
 #' Here's the response I got:
@@ -563,6 +564,7 @@ wgi
 #' are needed for your analysis.
 
 
+
 # 2.1) Creating transformations of variables ------------------------------
 
 #' Here I'm referring to transformations of numeric 
@@ -578,7 +580,7 @@ bigmac
 bigmac %>%
   mutate(
     price_dollars = local_price / dollar_ex
-  )
+  ) 
 
 #' Will add a new variable to the end of the data
 #' that is the result of the local price divided
@@ -620,7 +622,7 @@ ggeffects::ggeffect(bm, terms = "log_gdp") %>%
 ggeffects::ggeffect(bm, terms = "log_gdp") %>%
   plot() +
   scale_x_continuous(transform = scales::exp_trans()) +
-  scale_y_continuous(transform = scales::exp_trans())
+  scale_y_continuous(transform = scales::exp_trans()) 
 
 #' If you make the transformations in the model,
 #' then ggeffects will automatically reverse the
@@ -732,6 +734,7 @@ table(bsa_spss$over65)
 lm(data = bsa_spss,
    formula = welfare2 ~ over65 + politics_simple) %>%
   summary()
+
 
 
 # 2.3) Correcting variable types using parse_*() --------------------------
@@ -1149,6 +1152,8 @@ tea <- tea %>%
     sep = "kg"
   )
 
+tea
+
 #' Lastly, we can turn our variables into 
 #' numeric types by using the parse_number() function
 #' from earlier:
@@ -1462,6 +1467,64 @@ queen_s %>%
   ) 
 
 
+
+# 9) Data tidying challenges ----------------------------------------------
+
+#' I've included some untidy datasets that I've come across over
+#' several years that you can use to practice your data tidying
+#' skills - have a go at them in groups or independently to see
+#' if you can apply the tools we've used today. There are some
+#' suggested solutions in the tidying-challenge-solutions.R file.
+
+######################################################################
+
+# Tidying Challenge: data/sotkanet-data.xls
+
+#' This data is from the Sotkanet.fi (https://sotkanet.fi/sotkanet/en/index)
+#' statistical data service, which contains a wide range of interesting
+#' municipal data from Finland. The major challenge of tidying this data 
+#' comes from the fact that the years are given in the columns, and the 
+#' rows represent variable, year, municipality observations. We want to
+#' switch this over so that each row represents an observation in a given
+#' year, for a specific municipality, and each column represents a variable.
+#' 
+#' Difficulty: Easy
+#' - This is quite a typical and useful example of official statistical 
+#' releases across many countries
+
+
+######################################################################
+
+# Tidying Challenge: data/mortality-nomis.xlsx
+
+#' Successfully read and tidy the above spreadsheet so that all of the
+#' numeric variables are of the proper type, that missing values are 
+#' detected as missing. Turn the data into a long format, where each
+#' row represents a region for a specific year for a specific gender 
+#' (all,  male, female) and each column represents the number or
+#' rate of the mortality statistic.
+
+# Difficulty: Medium (but tedious!)
+# - It would be easier to try and read in each section and then join
+#   them all together at the end!
+
+
+
+######################################################################
+
+
+# Tidying Challenge: data/healthcare-beds-data.xlsx
+
+#' Successfully read and tidy the above spreadsheet so that all of the
+#' numeric variables are of the proper type, that missing values are 
+#' detected as missing, and that country names are consistent, without
+#' any footnotes or extra spaces.
+
+# Difficulty: Hard
+# - Probably need to use some regex/functions not covered: (.+), str_trim()
+# - Uses merged cells that throw an error with readxl
+
+
 # END and References -----------------------------------------------------
 
 #' This has been an attempt to try and condense all
@@ -1502,4 +1565,6 @@ queen_s %>%
 #' tidying, see Wickham, H. (2014). *Tidy Data*. Journal of 
 #' Statistical Software. 
 #' https://www.jstatsoft.org/article/view/v059i10
+
+
 
